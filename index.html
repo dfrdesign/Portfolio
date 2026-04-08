@@ -226,10 +226,36 @@
       p {
         font-size: 0.96rem;
       }
+      .theme-toggle {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 3;
+}
+
+.theme-toggle button {
+  border: 1px solid var(--soft-line);
+  background: rgba(255,255,255,0.02);
+  color: var(--fg);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: all 0.25s ease;
+}
+
+.theme-toggle button:hover {
+  background: rgba(255,255,255,0.06);
+}
     }
   </style>
 </head>
 <body>
+  <div class="theme-toggle">
+  <button id="themeToggle">Light</button>
+</div>
   <div class="noise"></div>
 
   <main class="container">
@@ -350,6 +376,23 @@
     }
 
     animate();
+    
+  const toggle = document.getElementById("themeToggle");
+  const body = document.body;
+
+  function updateToggle() {
+    toggle.textContent = body.classList.contains("light-mode")
+      ? "Dark"
+      : "Light";
+  }
+
+  toggle.addEventListener("click", () => {
+    body.classList.toggle("light-mode");
+    updateToggle();
+  });
+
+  updateToggle();
+
   </script>
 </body>
 </html>
